@@ -1,0 +1,14 @@
+$ aws s3api create-bucket --bucket "raghuram-aws1-mlschool" --create-bucket-configuration LocationConstraint="ap-south-1"
+{
+    "Location": "http://raghuram-aws1-mlschool.s3.amazonaws.com/"
+}
+$ aws s3 cp ./program/penguins.csv s3://raghuram-aws1-mlschool/penguins/data/data.csv
+
+$ aws sagemaker list-user-profiles | grep -E '"DomainId"|"UserProfileName"' | awk -F'[:,"]+' '{print $2":"$3 $4 $5}'
+
+DomainId: d-yn3qiw7zymcg
+UserProfileName: default-20231128t222572
+
+$ aws sagemaker describe-user-profile --domain-id "d-yn3qiw7zymcg" --user-profile-name "default-20231128t222572" | grep -E "ExecutionRole" | awk -F'["]' '{print $2": "$4}'
+
+ExecutionRole: arn:aws:iam::657255829381:role/service-role/AmazonSageMaker-ExecutionRole-20231128T222572
